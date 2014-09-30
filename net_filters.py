@@ -24,9 +24,9 @@ def find_mac(*a, **kw):
 
     facts = a[0]
     for int_txt in facts['ansible_interfaces']:
-        key = 'ansible_' + int_txt
+        key = 'ansible_' + int_txt.replace('-', '_')
         if key in facts and 'ipv4' in facts[key] and facts[key]['ipv4']['address'] == ip:
-            return facts[key]['macaddress']
+            return facts[key]['macaddress'].upper()
     return None
 
 
